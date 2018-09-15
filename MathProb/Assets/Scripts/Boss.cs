@@ -41,6 +41,7 @@ public class Boss : MonoBehaviour {
         
         healthBar.value = health;
     }
+    /*
     private void OnTriggerEnter2D(Collider2D other)
     {
         // deal the player damage ! 
@@ -53,4 +54,5 @@ public class Boss : MonoBehaviour {
             }
         }
     }
+    */
 }
