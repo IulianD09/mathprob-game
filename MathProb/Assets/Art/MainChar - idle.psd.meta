@@ -111,8 +111,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 486
-        height: 767
+        width: 117
+        height: 194
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,7 +120,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d5c47866a9520145938a652d7dd5f7f
+      spriteID: d2983864faa315844aef8c68de650011
       vertices: []
       indices: 
       edges: []
@@ -129,10 +129,10 @@ TextureImporter:
       name: MainChar - idle_1
       rect:
         serializedVersion: 2
-        x: 486
+        x: 117
         y: 0
-        width: 486
-        height: 767
+        width: 117
+        height: 194
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,7 +140,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a84246e5f63d9df419080d177bf267e9
+      spriteID: 26e577c3ae55c9d45b04729ee3c01ba2
       vertices: []
       indices: 
       edges: []

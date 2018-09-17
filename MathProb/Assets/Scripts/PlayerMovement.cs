@@ -13,24 +13,26 @@ public class PlayerMovement : MonoBehaviour {
 
     bool jump = false;
     bool crouch = false;
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();    
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetButtonDown("Jump"))
+        //Jumping with W
+        if (Input.GetKeyDown(KeyCode.W))
         {
             jump = true;
-            animator.SetBool("IsJumping", true);
+            animator.SetTrigger("jump");
         }
-        else if (Input.GetButtonUp("Jump"))
-        {
-            jump = false;
-        }
-
+        //Crouching with S
         if (Input.GetButtonDown("Crouch"))
         {
             crouch = true;
@@ -40,12 +42,12 @@ public class PlayerMovement : MonoBehaviour {
         }
 
     }
-
+    /*
     public void OnLanding() 
     {
-        animator.SetBool("IsJumping", false);
+        animator.SetTrigger("jump");
     }
-
+    */
     public void OnCrouching(bool isCrouching) {
         animator.SetBool("IsCrouching", isCrouching);
     }
@@ -54,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         //Move our char
         controller.Move(horizontalMove * Time.fixedDeltaTime , crouch , jump);
-        jump = false;  
+       jump = false;  
 
     }
 }
