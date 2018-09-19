@@ -219,7 +219,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.792661
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -282,13 +282,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd2b64bad181ce40bf4dbea36309468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 900
+  m_JumpForce: 2200
   m_CrouchSpeed: 0.4
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294967023
   m_GroundCheck: {fileID: 1496305246}
   m_CeilingCheck: {fileID: 1147590914}
   m_CrouchDisableCollider: {fileID: 1076510067}
@@ -376,7 +376,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1076510062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.568, y: -2.964, z: 0}
+  m_LocalPosition: {x: -7.62, y: -2.964, z: 0}
   m_LocalScale: {x: 1.0257863, y: 0.984483, z: 1}
   m_Children:
   - {fileID: 1147590914}
@@ -438,7 +438,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -457,7 +457,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1076510063}
   animator: {fileID: 1076510070}
-  runSpeed: 40
+  particleSpawn: {fileID: 1907908551551794, guid: e67d7b9864f200b4d87374ca40a7ab99,
+    type: 2}
+  runSpeed: 85
+  Speed: 40
+  dashTime: 0
+  waitDashTime: 0.3
 --- !u!95 &1076510070
 Animator:
   serializedVersion: 3
@@ -498,7 +503,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1147590913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.41, z: 0}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1076510065}
@@ -617,10 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
-  damage: 10
-  camAnim: {fileID: 0}
-  healthBar: {fileID: 0}
-  isDead: 0
+  deathEffect: {fileID: 0}
 --- !u!1 &1496305245
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +645,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1496305245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.81, z: 0}
+  m_LocalPosition: {x: -0.019, y: -0.924, z: 0}
   m_LocalScale: {x: 0.9999913, y: 1.0000072, z: 1}
   m_Children: []
   m_Father: {fileID: 1076510065}
@@ -817,8 +819,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1855327103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.297, y: 0.558, z: 18.130001}
-  m_LocalScale: {x: 1.1231306, y: 0.98669404, z: 1}
+  m_LocalPosition: {x: 0.065, y: 0.005, z: 18.130001}
+  m_LocalScale: {x: 1.2727805, y: 1.0759431, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
   m_RootOrder: 0

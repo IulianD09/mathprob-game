@@ -12,9 +12,9 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 
-	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+	const float k_CeilingRadius = .1f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
@@ -83,11 +83,17 @@ public class CharacterController2D : MonoBehaviour
 				if (!m_wasCrouching)
 				{
 					m_wasCrouching = true;
-					OnCrouchEvent.Invoke(true);
-				}
+					OnCrouchEvent.Invoke(true);  
+                }
+                if (m_Grounded == false && crouch == true)
+                {
+                    m_Rigidbody2D.gravityScale = 50;
+                }
+                else
+                    m_Rigidbody2D.gravityScale = 12;
 
-				// Reduce the speed by the crouchSpeed multiplier
-				move *= m_CrouchSpeed;
+                // Reduce the speed by the crouchSpeed multiplier
+                move *= m_CrouchSpeed;
 
 				// Disable one of the colliders when crouching
 				if (m_CrouchDisableCollider != null)
@@ -123,13 +129,33 @@ public class CharacterController2D : MonoBehaviour
 				Flip();
 			}
 		}
-		// If the player should jump...
-		if (m_Grounded && jump)
-		{
-			// Add a vertical force to the player.
-			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-		}
+        // If the player should jump...
+        
+        if (m_Grounded && jump)
+        {
+            // Add a vertical force to the player.
+            m_Grounded = false;
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+
+            /*
+            if (m_GroundCheck == false && m_Grounded == false)
+            {
+                m_JumpForce = 0f;
+                if (m_JumpForce == 0f && m_Grounded == true && m_GroundCheck == true)
+                {
+                    m_JumpForce = 2200f;
+                    m_Grounded = true;
+                }
+                else
+                {
+                    m_JumpForce = 0f;
+                    m_Grounded = false;
+                }
+            }
+            */
+            
+        }
+       
 	}
 
 
