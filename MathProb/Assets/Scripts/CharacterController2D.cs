@@ -15,8 +15,8 @@ public class CharacterController2D : MonoBehaviour
 	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .1f; // Radius of the overlap circle to determine if the player can stand up
-	private Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	public Rigidbody2D m_Rigidbody2D;
+	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
 	[Header("Events")]
@@ -29,6 +29,7 @@ public class CharacterController2D : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+
 
 	private void Awake()
 	{
@@ -77,26 +78,20 @@ public class CharacterController2D : MonoBehaviour
 		if (m_Grounded || m_AirControl)
 		{
 
-			// If crouching
-			if (crouch)
-			{
-				if (!m_wasCrouching)
-				{
-					m_wasCrouching = true;
-					OnCrouchEvent.Invoke(true);  
-                }
-                if (m_Grounded == false && crouch == true)
+            // If crouching
+            if (crouch)
+            {
+                if (!m_wasCrouching)
                 {
-                    m_Rigidbody2D.gravityScale = 50;
+                    m_wasCrouching = true;
+                    OnCrouchEvent.Invoke(true);
                 }
-                else
-                    m_Rigidbody2D.gravityScale = 12;
-
-                // Reduce the speed by the crouchSpeed multiplier
+                
+                //Crouch speed! 
                 move *= m_CrouchSpeed;
 
-				// Disable one of the colliders when crouching
-				if (m_CrouchDisableCollider != null)
+                // Disable one of the colliders when crouching
+                if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
 			} else
 			{
@@ -137,7 +132,7 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 
-            /*
+            /* //Tried to write some code to change the value of the jumpForce but i find out its kinda useless!
             if (m_GroundCheck == false && m_Grounded == false)
             {
                 m_JumpForce = 0f;
@@ -155,9 +150,7 @@ public class CharacterController2D : MonoBehaviour
             */
             
         }
-       
 	}
-
 
 	private void Flip()
 	{

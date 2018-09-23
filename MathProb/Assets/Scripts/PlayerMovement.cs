@@ -11,9 +11,11 @@ public class PlayerMovement : MonoBehaviour {
     public float runSpeed = 40f;
     public float Speed = 40f;
     float horizontalMove = 0f;
-    public float dashTime;
-    public float waitDashTime;
-
+    
+    public float dashSpeed;
+    private float dashTime;
+    public float startDashTime;
+    private int direction;
 
     bool jump = false;
     bool crouch = false;
@@ -21,79 +23,118 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         animator = GetComponent<Animator>();
-        dashTime = .3f;
-        waitDashTime +=Time.deltaTime;
+        dashTime = startDashTime;
     }
 
     // Update is called once per frame
-    void Update() {
+    public void Update()
+    {
+        // Animation for the dash move
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        // the actual movement
+        runSpeed = 85f;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        //setting up the dash speed value
+        dashSpeed = 30f;
+        //checking the direction if it is 0 it means we aren't dashing
+        if (direction == 0)
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.LeftArrow)){
+                direction = 1;
+                Instantiate(particleSpawn,transform.position,Quaternion.identity);
+            }
+            else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.RightArrow)){
+                direction = 2;
+                Instantiate(particleSpawn, transform.position, Quaternion.identity);
+            }
+            // else we are dashing
+        }else {
+            if (dashTime <= 0){
+                direction = 0;
+                dashTime = startDashTime;
+                controller.m_Rigidbody2D.velocity = Vector2.zero;
+            } else{
+                dashTime -= Time.deltaTime;
 
-        //Dashing speed 
-        Dash();
+                if (direction == 1)
+                {
+                    controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
+                }
+                else if (direction == 2)
+                {
+                    controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;           
+                }
+            }
+        }
+        // Dashing in left or right depends on which direction we are faceing even wihout have to press keys to move
+        if (controller.m_FacingRight == true && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed*2;
+            Instantiate(particleSpawn, transform.position, Quaternion.identity);
+        }
+        else if (controller.m_FacingRight == false && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed*2;
+            Instantiate(particleSpawn, transform.position, Quaternion.identity);
+        }
 
         //animation for our player - the running one!
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        
+
         //Jumping with W
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             jump = true;
             animator.SetTrigger("jump");
             animator.SetBool("IsJumping", true);
-        } 
-      
-        //Crouching with S
+        }
+
+        //Crouching with DownArrow
         if (Input.GetButtonDown("Crouch"))
         {
             animator.SetBool("IsJumping", false);
             crouch = true;
             animator.SetBool("IsCrouching", true);
 
-        } else if (Input.GetButtonUp("Crouch"))
+        }
+        else if (Input.GetButtonUp("Crouch"))
         {
             animator.SetBool("IsCrouching", false);
             crouch = false;
         }
     }
-
-    public void OnLanding()
+   public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
     }
 
-    public void OnCrouching(bool isCrouching) {
+    public void OnCrouching(bool isCrouching)
+    {
         animator.SetBool("IsCrouching", isCrouching);
     }
+
+    
 
     //Dashing
     void Dash()
     {
-        //We have to set the animaton for the dash effect just to be applyed on every if! 
-            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        //If LShift and A or D are pressed...
-        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
-        {
-            //...then the runSpeed increases!
-            runSpeed = 200f;
-            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+ 
+         
 
-            //also spawns a little particle after a dash!
-            Instantiate(particleSpawn, transform.position, Quaternion.identity);
-            Destroy(particleSpawn);
 
-        }
-        //Else if the LShift and the A or D keys aren't pressed...
-        else
-        {
-            //...the runSpeed value gets back to normal!
-            runSpeed = 85f;
-            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        }
 
-   
+
+
+
+
+
+
+
+
+
+
     }
-
-    void FixedUpdate()
+  void FixedUpdate()
     {
         //Move our char
         controller.Move(horizontalMove * Time.fixedDeltaTime , crouch , jump);
