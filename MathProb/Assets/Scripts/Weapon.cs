@@ -11,11 +11,11 @@ public class Weapon : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
+           Shoot();
         }
 	}
     void Shoot()
     {
-        Instantiate(bulletPrefab,firePont.position , firePont.rotation);
+        Instantiate(bulletPrefab, firePont.position , firePont.rotation);
     }
 }

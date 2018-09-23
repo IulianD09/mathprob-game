@@ -21,8 +21,7 @@ public class Bullet : MonoBehaviour {
             boss.TakeDamage(damage);
         }
 
-        Instantiate(impactEffect , transform.position, transform.rotation);
-
+        Instantiate(impactEffect , transform.position, Quaternion.identity);
         Destroy(gameObject);
 
     }

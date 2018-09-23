@@ -18,6 +18,7 @@ public class CharacterController2D : MonoBehaviour
 	public Rigidbody2D m_Rigidbody2D;
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+    public PlayerMovement pmovement;
 
 	[Header("Events")]
 	[Space]
@@ -130,26 +131,14 @@ public class CharacterController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-
-            /* //Tried to write some code to change the value of the jumpForce but i find out its kinda useless!
-            if (m_GroundCheck == false && m_Grounded == false)
-            {
-                m_JumpForce = 0f;
-                if (m_JumpForce == 0f && m_Grounded == true && m_GroundCheck == true)
-                {
-                    m_JumpForce = 2200f;
-                    m_Grounded = true;
-                }
-                else
-                {
-                    m_JumpForce = 0f;
-                    m_Grounded = false;
-                }
-            }
-            */
-            
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));   
         }
+
+        if (m_Grounded == false && jump == true)
+        {
+            m_Rigidbody2D.gravityScale = 0f;
+        }
+        m_Rigidbody2D.gravityScale = 12f;
 	}
 
 	private void Flip()
