@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     private float dashTime;
     public float startDashTime;
     private int direction;
+    public float setDashValue;
 
     bool jump = false;
     bool crouch = false;
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     public void Update()
     {
-
+        //The dash function
         Dash();
 
         //animation for our player - the running one!
@@ -49,9 +50,8 @@ public class PlayerMovement : MonoBehaviour {
             animator.SetBool("IsJumping", false);
             crouch = true;
             animator.SetBool("IsCrouching", true);
-            
-
         }
+        //else if DownArrow isn't pressed we arent gonna play the rouch animation
         else if (Input.GetButtonUp("Crouch"))
         {
             animator.SetBool("IsCrouching", false);
@@ -70,64 +70,91 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Dash()
     {
+        
         // Animation for the dash move
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         // the actual movement
         runSpeed = 85f;
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        //setting up the dash speed value
-        dashSpeed = 30f;
+
+        dashSpeed = setDashValue;
+
         //checking the direction if it is 0 it means we aren't dashing
         if (direction == 0)
         {
+            //If the LShift and LeftArrow are pressed the direction sets to 1 and we spawn some particles
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                controller.m_Rigidbody2D.gravityScale = 0f;
                 direction = 1;
                 Instantiate(particleSpawn, transform.position, Quaternion.identity);
-
             }
+            //Else if the LShift and RightArrow are pressed the direction sets to 2 and we spawn some particles
             else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.RightArrow))
             {
-                controller.m_Rigidbody2D.gravityScale = 0f;
                 direction = 2;
                 Instantiate(particleSpawn, transform.position, Quaternion.identity);
             }
-            // else we are dashing
+            //If we are pressing only LShift and we are facing right, then the direction sets to 3 and spawning particles
+            if (controller.m_FacingRight == true && Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                direction = 3;
+                Instantiate(particleSpawn, transform.position, Quaternion.identity);
+            }
+            //else if we are facing left and LShift is pressed, then the direction sets to 4 and spanign particles as well
+            else if (controller.m_FacingRight == false && Input.GetKeyDown(KeyCode.LeftShift)) 
+            {
+                direction = 4;
+                Instantiate(particleSpawn, transform.position, Quaternion.identity);
+            }
+            // else if its 1, 2, 3 or 4 we are dashing
         }
         else
         {
+            //If we ran out of juice the direction sets to 0 because we aren't dashing
             if (dashTime <= 0)
             {
                 direction = 0;
                 dashTime = startDashTime;
                 controller.m_Rigidbody2D.velocity = Vector2.zero;
             }
+            //else we can start dashing
             else
             {
                 dashTime -= Time.deltaTime;
-
+                
+                //if we move to the left with LShift and LeftArrow presssed..
                 if (direction == 1)
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
                 }
+                //else we will dash into the opposite direction
                 else if (direction == 2)
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
                 }
+                //but if we dash with only LShift and we are facing right we will dash right without having to press arrows
+                if (direction == 3)
+                {
+                    controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
+                }
+                //Same thing here but with the opposite direction
+                else if (direction == 4)
+                {
+                    controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
+                }
+                if (crouch == true && Input.GetButtonDown("Crouch"))
+                {
+                    dashSpeed = 0f;
+                    direction = 0;
+                    setDashValue = 0f;
+                    controller.m_Rigidbody2D.velocity = Vector2.zero;
+                }
+                if (jump)
+                {
+                    controller.m_Rigidbody2D.gravityScale = 0f;
+                }
             }
-        }
-        // Dashing in left or right depends on which direction we are faceing even wihout have to press keys to move
-        if (controller.m_FacingRight == true && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed * 2;
-            Instantiate(particleSpawn, transform.position, Quaternion.identity);
-        }
-        else if (controller.m_FacingRight == false && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed * 2;
-            Instantiate(particleSpawn, transform.position, Quaternion.identity);
-        }
+        }      
     }
 
   void FixedUpdate()

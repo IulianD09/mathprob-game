@@ -133,12 +133,7 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));   
         }
-
-        if (m_Grounded == false && jump == true)
-        {
-            m_Rigidbody2D.gravityScale = 0f;
-        }
-        m_Rigidbody2D.gravityScale = 12f;
+        
 	}
 
 	private void Flip()
