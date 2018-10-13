@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-guid: 827af30267cfbd946ab10eee1ea466b1
+guid: bc22cb93a106fa84086cc5c00bf7825e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Run and gun anim_0
-    21300002: Run and gun anim_1
-    21300004: Run and gun anim_2
-    21300006: Run and gun anim_3
-    21300008: Run and gun anim_4
-    21300010: Run and gun anim_5
-    21300012: Run and gun anim_6
+    21300000: NewMainChar - idle_0
+    21300002: NewMainChar - idle_1
+    21300004: NewMainChar - idle_2
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -36,7 +32,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -111,13 +107,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run and gun anim_0
+      name: NewMainChar - idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 117
-        height: 194
+        width: 142
+        height: 247
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,19 +121,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df6b20500602ace418f0ce791deb309f
+      spriteID: 6ddf5623f5c7c7d4e97712cd05cd22e0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run and gun anim_1
+      name: NewMainChar - idle_1
       rect:
         serializedVersion: 2
-        x: 117
+        x: 142
         y: 0
-        width: 117
-        height: 194
+        width: 142
+        height: 247
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,19 +141,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f80f4e40722c9414fad8a2fe4f2ed82c
+      spriteID: bed978f3f8c00ac4696ed355c354588c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run and gun anim_2
+      name: NewMainChar - idle_2
       rect:
         serializedVersion: 2
-        x: 234
+        x: 284
         y: 0
-        width: 117
-        height: 194
+        width: 142
+        height: 247
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,87 +161,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 719821eeb572ce14695ce9afaad7d1ff
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run and gun anim_3
-      rect:
-        serializedVersion: 2
-        x: 351
-        y: 0
-        width: 117
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8cf5ca5b9afafb44096f3ef62056dae4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run and gun anim_4
-      rect:
-        serializedVersion: 2
-        x: 468
-        y: 0
-        width: 117
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f0194a706263b1c48ad4c9a874037935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run and gun anim_5
-      rect:
-        serializedVersion: 2
-        x: 585
-        y: 0
-        width: 117
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 162614464dba15042a3053fc08da9507
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run and gun anim_6
-      rect:
-        serializedVersion: 2
-        x: 702
-        y: 0
-        width: 117
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d2308e3f151e7cb4b88d76913ba3274d
+      spriteID: 18b8daf4b942ba544b262a4b8620a381
       vertices: []
       indices: 
       edges: []
@@ -253,7 +169,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f54ea13dcd711294b9abb2fdbe7c35a2
+    spriteID: d9aaaa3ac3fb7a447aeb94eac5be3893
     vertices: []
     indices: 
     edges: []

@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: b888806746b23064693746a43fdf016e
+guid: 3f16f9c382f2fd74fbe9c03fd7cf36c9
 TextureImporter:
   fileIDToRecycleName:
-    21300000: MainChar_0
+    21300000: NewMainChar - Ultimate_0
+    21300002: NewMainChar - Ultimate_1
+    21300004: NewMainChar - Ultimate_2
+    21300006: NewMainChar - Ultimate_3
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -30,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -105,13 +108,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MainChar_0
+      name: NewMainChar - Ultimate_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 117
-        height: 194
+        width: 560
+        height: 646
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,7 +122,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9debebc6179af8a41a03073942d58106
+      spriteID: 256e8238737850f489d3298f9eef824f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewMainChar - Ultimate_1
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 560
+        height: 646
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7ea41effab7ca94e90716c3c84cdd36
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewMainChar - Ultimate_2
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 560
+        height: 646
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f442a5171cd291b45810bf2d2051788b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewMainChar - Ultimate_3
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 0
+        width: 560
+        height: 646
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f39d68d93dac94aaf7b6d4c8bfa5e5
       vertices: []
       indices: 
       edges: []
@@ -127,7 +190,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 162af6b865d219148823d9976fa28e46
+    spriteID: 30fd91f13eb74b846bb00cfd83a8f357
     vertices: []
     indices: 
     edges: []
