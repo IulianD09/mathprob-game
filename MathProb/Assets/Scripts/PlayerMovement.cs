@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     
     bool jump = false;
     bool crouch = false;
+    bool dash = false;
 
     void Start()
     {
@@ -35,11 +36,10 @@ public class PlayerMovement : MonoBehaviour {
         //animation for our player - the running one!
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        //Jumping with W
+        //Jumping with UpArrow
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             jump = true;
-            animator.SetTrigger("jump");
             animator.SetBool("IsJumping", true);
             animator.SetBool("IsCrouching", false);
         }
@@ -73,44 +73,64 @@ public class PlayerMovement : MonoBehaviour {
         animator.SetBool("IsCrouching", isCrouching);
     }
 
+    public void OnDashing(bool isDashing)
+    {
+        animator.SetBool("IsDashing", isDashing);
+    }
+
     public void Dash()
     {
-        
-        // Animation for the dash move
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        // the actual movement
-        runSpeed = 150f;
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (dash)
+        {
+            dash = true;
+            animator.SetBool("IsDashing", false);
+            runSpeed = 150f;
+        }
+        else
+        {
+            // Animation for the dash move
+            animator.SetBool("IsDashing", true);
 
+            // the actual movement
+            runSpeed = 150f;
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        }
         dashSpeed = setDashValue;
 
         //checking the direction if it is 0 it means we aren't dashing
         if (direction == 0)
         {
+            dash = false;
             //If the LShift and LeftArrow are pressed the direction sets to 1 and we spawn some particles
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 direction = 1;
                 Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                dash = true;
             }
             //Else if the LShift and RightArrow are pressed the direction sets to 2 and we spawn some particles
             else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.RightArrow))
             {
                 direction = 2;
                 Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                dash = true;
             }
             //If we are pressing only LShift and we are facing right, then the direction sets to 3 and start spawning particles
             if (controller.m_FacingRight == true && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 direction = 3;
                 Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                dash = true;
             }
+
             //else if we are facing left and LShift is pressed, then the direction sets to 4 and spawns particles as well
-            else if (controller.m_FacingRight == false && Input.GetKeyDown(KeyCode.LeftShift)) 
+            else if (controller.m_FacingRight == false && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 direction = 4;
                 Instantiate(particleSpawn, transform.position, Quaternion.identity);
+                dash = true;
             }
+            animator.SetBool("IsDashing", false);
             // else if its 1, 2, 3 or 4 we are dashing
         }
         else
@@ -129,30 +149,38 @@ public class PlayerMovement : MonoBehaviour {
             {
                 //we slowly decrease the dash time
                 dashTime -= Time.deltaTime;
-                
+
                 //if we move to the left with LShift and LeftArrow presssed..
-                if (direction == 1)
+                if (direction == 1) 
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
+                    dash = true;
+                    animator.SetBool("IsDashing", true);
                 }
                 //else we will dash into the opposite direction
                 else if (direction == 2)
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
+                    dash = true;
+                    animator.SetBool("IsDashing", true);
                 }
                 //but if we dash with only LShift and we are facing right we will dash right without having to press arrows
                 if (direction == 3)
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
+                    dash = true;
+                    animator.SetBool("IsDashing", true);
                 }
                 //Same thing here but with the opposite direction
                 else if (direction == 4)
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
+                    dash = true;
+                    animator.SetBool("IsDashing", true);
                 }
             }
         }      
@@ -160,9 +188,9 @@ public class PlayerMovement : MonoBehaviour {
 
   void FixedUpdate()
     {
-        //Move our char
-        controller.Move(horizontalMove * Time.fixedDeltaTime , crouch , jump);
-       jump = false;  
-
+       //Move our char
+       controller.Move(horizontalMove * Time.fixedDeltaTime , crouch , jump, dash);
+        jump = false;
+        dash = false;
     }
 }

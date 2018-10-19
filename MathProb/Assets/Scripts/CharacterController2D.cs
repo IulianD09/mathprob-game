@@ -30,6 +30,8 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+    public BoolEvent OnDashEvent;
+    private bool m_isDashing =false;
 
 	private void Awake()
 	{
@@ -40,6 +42,9 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
+
+        if (OnDashEvent == null)
+            OnDashEvent = new BoolEvent();
 	}
 
 	private void FixedUpdate()
@@ -62,7 +67,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool crouch, bool jump, bool dash)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -73,9 +78,25 @@ public class CharacterController2D : MonoBehaviour
 				crouch = true;
 			}
 		}
+        //if the air control is off
+        if (!m_AirControl)
+        {
+            // If the input is moving the player right and the player is facing left...
+            if (move > 0 && !m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (move < 0 && m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
+        }
 
-		//only control the player if grounded or airControl is turned on
-		if (m_Grounded || m_AirControl)
+		//only control the player if we are grounded or if we have air ontrol
+		if (m_Grounded || m_AirControl || m_isDashing)
 		{
 
             // If crouching
@@ -89,7 +110,7 @@ public class CharacterController2D : MonoBehaviour
                 
                 //Crouch speed! 
                 move *= m_CrouchSpeed;
-
+                
                 // Disable one of the colliders when crouching
                 if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
@@ -106,23 +127,40 @@ public class CharacterController2D : MonoBehaviour
 				}
 			}
 
-			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            if (dash)
+            {
+                if (!m_isDashing)
+                {
+                    m_isDashing = true;
+                    OnDashEvent.Invoke(true);
+                }
+            }
+            else
+            {
+                if (m_isDashing)
+                {
+                    m_isDashing = false;
+                    OnDashEvent.Invoke(false);
+                }
+            }
+
+            // If the input is moving the player right and the player is facing left...
+            if (move > 0 && !m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (move < 0 && m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
+            // Move the character by finding the target velocity
+            Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
-			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
 		}
         // If the player should jump...
         
@@ -132,6 +170,8 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));   
         }
+
+      
         
 	}
 

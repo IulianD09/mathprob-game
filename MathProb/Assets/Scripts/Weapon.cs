@@ -7,17 +7,24 @@ public class Weapon : MonoBehaviour {
     public Transform firePont;
     public GameObject bulletPrefab;
     public GameObject shootParticle;
-    
+
+    private float timeBtwShots;
+    public float startTimeBtwShots;
+
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (timeBtwShots <= 0)
         {
-           Shoot();
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Instantiate(bulletPrefab, firePont.position, firePont.rotation);
+                Instantiate(shootParticle, firePont.position, firePont.rotation);
+                timeBtwShots = startTimeBtwShots;
+            }
         }
-    }
-    void Shoot()
-    {
-        Instantiate(bulletPrefab, firePont.position , firePont.rotation);
-        Instantiate(shootParticle, firePont.position, firePont.rotation);
+        else{
+            timeBtwShots -= Time.deltaTime;
+        }
     }
 }
