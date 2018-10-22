@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour {
+public class Health : MonoBehaviour
+{
 
     public int health;
     public int numOfHearts;
@@ -11,6 +12,12 @@ public class Health : MonoBehaviour {
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    public Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -23,18 +30,20 @@ public class Health : MonoBehaviour {
             if (i < health)
             {
                 hearts[i].sprite = fullHeart;
-            }else
+            }
+            else
             {
                 hearts[i].sprite = emptyHeart;
             }
+
             if (i < numOfHearts)
             {
                 hearts[i].enabled = true;
             }
-            else {
+            else
+            {
                 hearts[i].enabled = false;
             }
-        }    
+        }
     }
-
 }

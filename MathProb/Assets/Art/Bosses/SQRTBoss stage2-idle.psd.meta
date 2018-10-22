@@ -6,7 +6,7 @@ TextureImporter:
     21300002: SQRTBoss stage2-idle_1
     21300004: SQRTBoss stage2-idle_2
   externalObjects: {}
-  serializedVersion: 5
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -24,6 +24,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -34,7 +36,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: -1
     aniso: -1
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -112,8 +114,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 395
-        height: 409
+        width: 362
+        height: 352
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,7 +123,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 386817fc73f9f1246866d29c5e705586
+      spriteID: 110e878737f9a0243a2857330751e39d
       vertices: []
       indices: 
       edges: []
@@ -130,10 +132,10 @@ TextureImporter:
       name: SQRTBoss stage2-idle_1
       rect:
         serializedVersion: 2
-        x: 395
+        x: 362
         y: 0
-        width: 395
-        height: 409
+        width: 362
+        height: 352
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,7 +143,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22d227bc7d761fc4498f672c5423c139
+      spriteID: 6fecce29cc182ca48be0e15210cbc5d6
       vertices: []
       indices: 
       edges: []
@@ -150,10 +152,10 @@ TextureImporter:
       name: SQRTBoss stage2-idle_2
       rect:
         serializedVersion: 2
-        x: 790
+        x: 724
         y: 0
-        width: 395
-        height: 409
+        width: 362
+        height: 352
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,7 +163,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fca9ae6ebad56e48a2d5180bacb4a38
+      spriteID: 0003b2d2736f4514c911f1e45a6a981b
       vertices: []
       indices: 
       edges: []
@@ -175,6 +177,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 1
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

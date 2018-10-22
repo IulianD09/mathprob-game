@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour {
 
     public Transform firePont;
     public GameObject bulletPrefab;
-    public GameObject shootParticle;
 
     private float timeBtwShots;
     public float startTimeBtwShots;
@@ -19,7 +18,6 @@ public class Weapon : MonoBehaviour {
             if (Input.GetKey(KeyCode.Space))
             {
                 Instantiate(bulletPrefab, firePont.position, firePont.rotation);
-                Instantiate(shootParticle, firePont.position, firePont.rotation);
                 timeBtwShots = startTimeBtwShots;
             }
         }

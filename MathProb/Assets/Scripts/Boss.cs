@@ -7,14 +7,14 @@ public class Boss : MonoBehaviour {
 
     public int health = 1000;
     public GameObject[] explosionEff;
-
+    public Animator anim;
+    
     [Space(3)]
-    public float waitingForNextSpawn = 10;
-    public float waitForDeath;
+    public float timeBtwSpawn = 10;
     public float theCountdown = 10;
-    public float counter;
 
     //public GameObject deathEffect;
+
     [Header("X spawn range")]
     public float minX;
     public float maxX;
@@ -22,38 +22,51 @@ public class Boss : MonoBehaviour {
     [Header("Y spawn range")]
     public float minY;
     public float maxY;
-    
+
+
+    public void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
+
+        if (health <= 1000)
+        {
+            anim.SetTrigger("stageTwo");
+        }
+
         if (health <= 0)
         {
-        Die();
+            anim.SetTrigger("death");
+          StartCoroutine(Die());
         }
     }
-
-    private void Update()
+    IEnumerator Die()
     {
-        theCountdown -= Time.deltaTime;
         if (theCountdown <= 0)
         {
-
-            theCountdown = waitingForNextSpawn;
+            theCountdown = timeBtwSpawn;
         }
-    }
-    void Die()
-    {
-        
-        Vector2 pos = new Vector2(Random.Range(minX,maxY), Random.Range(minY,maxY));
-        GameObject explEff =explosionEff[Random.Range(0,explosionEff.Length)];
-
-        Instantiate(explEff,pos,Quaternion.identity);
-
-        counter -= Time.deltaTime;
-        if (counter <= 0)
+        else
         {
-            counter = waitForDeath;
+            theCountdown -= Time.deltaTime;
         }
-        Destroy(gameObject);
+
+        while(health <= 0)
+        {
+            Vector2 pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+
+            GameObject explEff = explosionEff[Random.Range(0, explosionEff.Length)];
+
+            yield return new WaitForSeconds(1f);
+            Instantiate(explEff, pos, Quaternion.identity);
+
+            Destroy(gameObject, 3f);
+        }
+        
+
     }
 }

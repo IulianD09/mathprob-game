@@ -8,7 +8,7 @@ TextureImporter:
     21300006: SQRTBoss stage1_3
     21300008: SQRTBoss stage1_4
   externalObjects: {}
-  serializedVersion: 5
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -26,6 +26,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -36,7 +38,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: -1
     aniso: -1
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -115,15 +117,15 @@ TextureImporter:
         x: 0
         y: 0
         width: 479
-        height: 558
+        height: 474
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5531b4cf3abdd834a9eb6a1638f4bfd8
+      spriteID: 2d46dda641153c844a065ec3ab632124
       vertices: []
       indices: 
       edges: []
@@ -135,15 +137,15 @@ TextureImporter:
         x: 479
         y: 0
         width: 479
-        height: 558
+        height: 474
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4496c0f6c2badb94eb42dc6202639796
+      spriteID: 7bd4968c9d2e6a54aa311bf8ece4ce9c
       vertices: []
       indices: 
       edges: []
@@ -154,16 +156,16 @@ TextureImporter:
         serializedVersion: 2
         x: 958
         y: 0
-        width: 479
-        height: 558
+        width: 442
+        height: 474
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec99b8059a208d749b986d36342971f1
+      spriteID: 7f41a807016987743967aba2c65c1961
       vertices: []
       indices: 
       edges: []
@@ -172,18 +174,18 @@ TextureImporter:
       name: SQRTBoss stage1_3
       rect:
         serializedVersion: 2
-        x: 1437
+        x: 1399
         y: 0
-        width: 479
-        height: 558
+        width: 516
+        height: 474
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3ea7d7a29c22a746babfb26f4c51c8d
+      spriteID: 7becadb5db0c6764fb3d3bd2b27aa478
       vertices: []
       indices: 
       edges: []
@@ -195,15 +197,15 @@ TextureImporter:
         x: 1916
         y: 0
         width: 479
-        height: 558
+        height: 474
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df2adea17657e26488c547d13d56d39d
+      spriteID: e3870c00dc34b05489e70b37f9f54bee
       vertices: []
       indices: 
       edges: []
@@ -217,6 +219,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 1
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

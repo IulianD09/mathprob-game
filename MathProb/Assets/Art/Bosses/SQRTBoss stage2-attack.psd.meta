@@ -10,7 +10,7 @@ TextureImporter:
     21300010: SQRTBoss stage2-attack_5
     21300012: SQRTBoss stage2-attack_6
   externalObjects: {}
-  serializedVersion: 5
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -28,6 +28,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -38,7 +40,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: -1
     aniso: -1
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -116,16 +118,16 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 377
-        height: 354
+        width: 362
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0cc1507a534b1144bea296c58308e51
+      spriteID: 37c6260b0efd12842afc01147e4c93dd
       vertices: []
       indices: 
       edges: []
@@ -134,18 +136,18 @@ TextureImporter:
       name: SQRTBoss stage2-attack_1
       rect:
         serializedVersion: 2
-        x: 377
+        x: 361
         y: 0
-        width: 377
-        height: 354
+        width: 364
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c1867d94558e7647b430483a6cb07a7
+      spriteID: 4188503b49ecd1443b37e66d7d3e332d
       vertices: []
       indices: 
       edges: []
@@ -154,18 +156,18 @@ TextureImporter:
       name: SQRTBoss stage2-attack_2
       rect:
         serializedVersion: 2
-        x: 754
+        x: 725
         y: 0
-        width: 377
-        height: 354
+        width: 359
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d3dad929d4a6334bad96e936c2216bc
+      spriteID: f255db9ef0e0b1f48aba10d4c538a5e1
       vertices: []
       indices: 
       edges: []
@@ -174,18 +176,18 @@ TextureImporter:
       name: SQRTBoss stage2-attack_3
       rect:
         serializedVersion: 2
-        x: 1131
+        x: 1086
         y: 0
-        width: 377
-        height: 354
+        width: 362
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a530a7bd6433b614ba7d7c75d7e412ea
+      spriteID: 5a15bf0eb3202e5419df0a282cbf9fd6
       vertices: []
       indices: 
       edges: []
@@ -194,18 +196,18 @@ TextureImporter:
       name: SQRTBoss stage2-attack_4
       rect:
         serializedVersion: 2
-        x: 1508
+        x: 1448
         y: 0
-        width: 377
-        height: 354
+        width: 363
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f7eb86a78f2e654597310651e58d58e
+      spriteID: b587b844ec596d4448bec612280704bf
       vertices: []
       indices: 
       edges: []
@@ -214,18 +216,18 @@ TextureImporter:
       name: SQRTBoss stage2-attack_5
       rect:
         serializedVersion: 2
-        x: 1885
+        x: 1809
         y: 0
-        width: 377
-        height: 354
+        width: 364
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c6509fb6c3c1564f937d4677b235dd4
+      spriteID: 7f01eb5d1caccf1428582e76f6fca259
       vertices: []
       indices: 
       edges: []
@@ -234,18 +236,18 @@ TextureImporter:
       name: SQRTBoss stage2-attack_6
       rect:
         serializedVersion: 2
-        x: 2262
+        x: 2176
         y: 0
-        width: 377
-        height: 354
+        width: 358
+        height: 352
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4057176f16daf0944b6ceabe0178a763
+      spriteID: f661ac55fa671f6459c14b6979042f72
       vertices: []
       indices: 
       edges: []
@@ -259,6 +261,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 1
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
