@@ -44,6 +44,26 @@ public class Health : MonoBehaviour
             {
                 hearts[i].enabled = false;
             }
+            if (i == health)
+            {
+                hearts[i].enabled = false;
+            }
+            if (i == numOfHearts)
+            {
+                hearts[i].enabled = false;
+            }
+
         }
+        if (health <= 0 && numOfHearts <= 0)
+        {
+            Dead();
+        }
+
     }
+    public void Dead()
+    {
+        //Instantiate particles for the dead effect or andd an animation
+        Debug.Log("dead");
+    }
+    
 }

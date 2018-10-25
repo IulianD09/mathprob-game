@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour {
+public class Boss : MonoBehaviour
+{
 
     public int health = 1000;
+    public int takenDmg = 1;
+    public int stageTwoHp;
+
     public GameObject[] explosionEff;
     public Animator anim;
-    
+
     [Space(3)]
     public float timeBtwSpawn = 10;
     public float theCountdown = 10;
@@ -24,16 +28,16 @@ public class Boss : MonoBehaviour {
     public float maxY;
 
 
-    public void Start()
+    private void Start()
     {
         anim = GetComponent<Animator>();
     }
-
+   
     public void TakeDamage(int damage)
     {
         health -= damage;
 
-        if (health <= 1000)
+        if (health <= stageTwoHp)
         {
             anim.SetTrigger("stageTwo");
         }
@@ -41,7 +45,7 @@ public class Boss : MonoBehaviour {
         if (health <= 0)
         {
             anim.SetTrigger("death");
-          StartCoroutine(Die());
+            StartCoroutine(Die());
         }
     }
     IEnumerator Die()
@@ -55,7 +59,7 @@ public class Boss : MonoBehaviour {
             theCountdown -= Time.deltaTime;
         }
 
-        while(health <= 0)
+        while (health <= 0)
         {
             Vector2 pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
 
@@ -66,7 +70,20 @@ public class Boss : MonoBehaviour {
 
             Destroy(gameObject, 3f);
         }
-        
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //deal the player damage
+        if (other.CompareTag("Player"))
+        {
+            Health hp = other.GetComponent<Health>();
+            CameraShake shake = other.GetComponent<CameraShake>();
+
+            hp.health -= takenDmg;
+            hp.numOfHearts -= takenDmg;
+          
+             StartCoroutine(shake.CamShake());
+        }
     }
 }

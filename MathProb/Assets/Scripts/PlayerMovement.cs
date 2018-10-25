@@ -186,6 +186,15 @@ public class PlayerMovement : MonoBehaviour {
         }      
     }
 
+    public void Ultimate()
+    {
+     //Do the ultimate animation
+
+     //Cleans the screen from any attacks and deals some damage to the boss
+
+     //Resets the timer when the ultimate pesses and sets the new timer
+    }
+
   void FixedUpdate()
     {
        //Move our char

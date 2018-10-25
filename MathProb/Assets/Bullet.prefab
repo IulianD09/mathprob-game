@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
-  damage: 100
+  damage: 5
   rb: {fileID: 50380197869384718}
 --- !u!212 &212793825437415404
 SpriteRenderer:
