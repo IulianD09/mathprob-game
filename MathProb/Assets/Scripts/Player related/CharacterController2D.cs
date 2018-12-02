@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class CharacterController2D : MonoBehaviour
 {
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
-	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = 0.0000001f;	// Amount of maxSpeed applied to crouching movement. 1 = 100%
+    [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = 0.0000001f;	                // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
@@ -18,7 +18,7 @@ public class CharacterController2D : MonoBehaviour
 	public Rigidbody2D m_Rigidbody2D;
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-   
+
 	[Header("Events")]
 	[Space]
 
@@ -75,7 +75,7 @@ public class CharacterController2D : MonoBehaviour
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
-				crouch = true;
+				crouch = false;
 			}
 		}
         //if the air control is off
@@ -110,10 +110,18 @@ public class CharacterController2D : MonoBehaviour
                 
                 //Crouch speed! 
                 move *= m_CrouchSpeed;
-                
+
                 // Disable one of the colliders when crouching
                 if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = false;
+                {
+                    m_CrouchDisableCollider.enabled = false;
+
+                    if (move > 0 || move < 0) 
+                    {
+                        m_CrouchSpeed = 1f;
+                        m_CrouchDisableCollider.enabled = true;
+                    }
+                }
 			} else
 			{
 				// Enable the collider when not crouching
@@ -169,10 +177,7 @@ public class CharacterController2D : MonoBehaviour
             // Add a vertical force to the player.
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));   
-        }
-
-      
-        
+        }  
 	}
 
 	private void Flip()
