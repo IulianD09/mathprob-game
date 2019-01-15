@@ -9,6 +9,12 @@ public class DisableColl : MonoBehaviour {
     public bool evenRows = false;
     public bool oddRows = false;
     public bool succesively = false;
+
+    [HideInInspector]
+    public bool succesivelyV1 = false;
+    [HideInInspector]
+    public bool succesivelyV2 = false;
+
     public bool endAttack = true;
     public bool firstAndLast = false;
 
@@ -64,45 +70,64 @@ public class DisableColl : MonoBehaviour {
         evenRows = false;
         oddRows = false;
 
-        coll[0].enabled = true;
+        int rand = Random.Range(0, 2);
 
-        yield return new WaitForSeconds(wait);
-        coll[0].enabled = false;
-        coll[1].enabled = true;
+        if (rand == 0) 
+        {
+            succesivelyV1 = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[1].enabled = false;
-        coll[2].enabled = true;
+            if (succesivelyV1)
+            {
+                coll[0].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[2].enabled = false;
-        coll[3].enabled = true;
+                yield return new WaitForSeconds(wait);
+                coll[0].enabled = false;
+                coll[1].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[3].enabled = false;
-        coll[4].enabled = true;
+                yield return new WaitForSeconds(wait);
+                coll[1].enabled = false;
+                coll[2].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[4].enabled = false;
-        coll[5].enabled = true;
+                yield return new WaitForSeconds(wait);
+                coll[2].enabled = false;
+                coll[3].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[5].enabled = false;
-        coll[6].enabled = true;
+                yield return new WaitForSeconds(wait);
+                coll[3].enabled = false;
+            }
+        }
+        if (rand == 1) 
+        {
+            succesivelyV2 = true;
+            if (succesivelyV2) 
+            {
+                coll[8].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[6].enabled = false;
-        coll[7].enabled = true;
+                yield return new WaitForSeconds(wait);
+                coll[8].enabled = false;
+                coll[7].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[7].enabled = false;
-        coll[8].enabled = true;
+                yield return new WaitForSeconds(wait);
+                coll[7].enabled = false;
+                coll[6].enabled = true;
 
-        yield return new WaitForSeconds(wait);
-        coll[8].enabled = false;
+                yield return new WaitForSeconds(wait);
+                coll[6].enabled = false;
+                coll[5].enabled = true;
+
+                yield return new WaitForSeconds(wait);
+                coll[5].enabled = false;
+                coll[4].enabled = true;
+
+                yield return new WaitForSeconds(wait);
+                coll[4].enabled = false;
+            }
+        }
 
         endAttack = true;
         succesively = false;
+        succesivelyV1 = false;
+        succesivelyV2 = false;
     }
     public IEnumerator EvenRows()
     {

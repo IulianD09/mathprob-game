@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a673757c7ea4ae3489352fd24896eabf
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: PixelForce
+  fontNames:
+  - PixelForce
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: fd369609d5ca3d14f9cc171abf6cddd7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

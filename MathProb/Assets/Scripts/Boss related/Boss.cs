@@ -11,8 +11,13 @@ public class Boss : MonoBehaviour
 
     //private float timeBtwShots;
     //public float startTimeBtwShots;
-
+    [Space]
     public GameObject[] explosionEff;
+    [Space]
+    public Transform[] beforeSpawnSpots;
+    [Space]
+    public Transform[] lighningSpawnSpots;
+    [Space]
     public Animator anim;
     //public Transform[] firePoints;
     //public GameObject projectile;
@@ -21,12 +26,15 @@ public class Boss : MonoBehaviour
     public Collider2D col2D;
     public Attack attack;
     public DisableColl disableColl;
+    public GameObject beforeSpawnPrefab;
+    public GameObject lightningPrefab;
 
     [Space(3)]
     private float timeBtwSpawn = 10;
     public float theCountdown = 10;
     public float waitSecs;
     public float waitSecsStTwo;
+    public float wait;
 
     //public GameObject deathEffect;
 
@@ -38,8 +46,8 @@ public class Boss : MonoBehaviour
     public float minY;
     public float maxY;
 
-    private int rand;
-    private int randStTwo;
+    //private int rand;
+    //private int randStTwo;
 
     private void Start()
     {
@@ -49,7 +57,7 @@ public class Boss : MonoBehaviour
         theCountdown = timeBtwSpawn;
         //timeBtwShots = startTimeBtwShots;
 
-        InvokeRepeating("BossBattle", 1f, 4f);
+        InvokeRepeating("BossBattle", 0f, 5f);
     }
     
     public void TakeDamage(int damage)
@@ -95,45 +103,138 @@ public class Boss : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("SQRTBoss_attack_s1")) 
         {
             // Debug.Log("Attack stage 1 is playing");
-            Battle();
+            StartCoroutine(Battle());
         }
         // Cheks if the Stage 2 attack is playing
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("SQRTBoss_attack_s2")) 
         {
             //  Debug.Log("Attack stage 2 is playing");
-            StageTwo();
+            StartCoroutine(StageTwo());
         }
 
         // Checks if the other animations are playing
         // if (anim.GetCurrentAnimatorStateInfo(0).IsName("SQRTBoss_idle_s2") ||anim.GetCurrentAnimatorStateInfo(0).IsName("SQRTBoss_idle") ||anim.GetCurrentAnimatorStateInfo(0).IsName("SQRTBoss_dead"))
         
     }
-    void Battle()
+    IEnumerator Battle()
     {
-        rand = Random.Range(0, 2);
+       int rand = Random.Range(0, 2);
 
         switch (rand)
         {
             case 0:
+                Debug.Log("Even Rows");
+
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[0].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[2].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[4].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[6].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[8].transform.position, Quaternion.identity);
+
+                yield return new WaitForSeconds(1f);
+
+                Instantiate(lightningPrefab, lighningSpawnSpots[0].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[2].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[4].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[6].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[8].transform.position, Quaternion.identity);
+
                 disableColl.evenRows = true;
+
                 break;
             case 1:
+                Debug.Log("Odd Rows");
+
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[1].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[3].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[5].transform.position, Quaternion.identity);
+                Instantiate(beforeSpawnPrefab, beforeSpawnSpots[7].transform.position, Quaternion.identity);
+
+                yield return new WaitForSeconds(1f);
+
+                Instantiate(lightningPrefab, lighningSpawnSpots[1].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[3].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[5].transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, lighningSpawnSpots[7].transform.position, Quaternion.identity);
+
                 disableColl.oddRows = true;
+
                 break;
         }
-
     }
-    void StageTwo()
+    IEnumerator StageTwo()
     {
-        randStTwo = Random.Range(0, 2);
+        int randStTwo = Random.Range(0, 2);
 
         switch (randStTwo)
         {
             case 0:
-                disableColl.succesively = true;
-                break;
+                Debug.Log("Succesively");
 
+                disableColl.succesively = true;
+
+                if (disableColl.succesively)
+                {
+                    if(disableColl.succesivelyV1)
+                    {
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[0].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[1].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[2].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[3].transform.position, Quaternion.identity);
+                    }
+                    if (disableColl.succesivelyV2)
+                    {
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[8].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[7].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[6].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[5].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(beforeSpawnPrefab, beforeSpawnSpots[4].transform.position, Quaternion.identity);
+                    }
+                }
+
+                yield return new WaitForSeconds(2f);
+
+                disableColl.succesively = true;
+
+                if (disableColl.succesively)
+                {
+                    if (disableColl.succesivelyV1)
+                    {
+                        Instantiate(lightningPrefab, lighningSpawnSpots[0].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[1].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[2].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[3].transform.position, Quaternion.identity);
+                    }
+                    if (disableColl.succesivelyV2)
+                    {
+                        Instantiate(lightningPrefab, lighningSpawnSpots[8].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[7].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[6].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[5].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(wait);
+                        Instantiate(lightningPrefab, lighningSpawnSpots[4].transform.position, Quaternion.identity);
+                    }
+                }
+
+                break;
             case 1:
+                Debug.Log("First And Last");
+
+                yield return new WaitForSeconds(2f);
+
                 disableColl.firstAndLast = true;
                 break;
         }

@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: 2a97ccb1d5e8fb24b885d09a8bde6357
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: SQRTBoss stage1-idle 1_0
-    21300002: SQRTBoss stage1-idle 1_1
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: SQRTBoss stage1-idle 1_0
+  - first:
+      213: 21300002
+    second: SQRTBoss stage1-idle 1_1
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 8
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -33,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -73,14 +77,14 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: iPhone
@@ -123,6 +127,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: f075237d85a573945a42e044a2831b31
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -143,6 +148,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 972a0866568fcdf4fb3f8f642938f5ed
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -151,10 +157,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: c8d3b1813c6b178458263a7a71b08fed
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1
