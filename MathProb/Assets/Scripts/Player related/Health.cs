@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public int health;
     public int numOfHearts;
     public bool immortal = false;
+    public bool noDmg = false;
 
     [SerializeField]
     private float immortalTime;
@@ -69,18 +70,20 @@ public class Health : MonoBehaviour
         if (other.CompareTag("Boss"))
         {
             StartCoroutine(TakePlayerDamage());
+            noDmg = false;
             immortal = false;
         }
     }
     public IEnumerator TakePlayerDamage()
     {
         //CameraShake shake = other.GetComponent<CameraShake>();
-        if (!immortal)
+        if (!immortal || !noDmg)
         {
             health--;
             //numOfHearts--;
 
             immortal = true;
+            noDmg = true;
 
             if(health > 0)
             {
@@ -89,6 +92,7 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(immortalTime);
 
             immortal = false;
+            noDmg = false; 
         }
     }
     private IEnumerator IndicateImmortal()

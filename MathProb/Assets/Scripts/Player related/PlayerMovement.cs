@@ -9,19 +9,27 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject particleSpawn;
     public Health health;
 
+    [Space]
     public float runSpeed = 100f;
     float horizontalMove = 0f;
     float playerBoudaryRadius = 0.5f;
 
+    [Space]
     private float dashSpeed;
     private float dashTime;
     public float startDashTime;
     private int direction;
     public float setDashValue;
-    
-     bool jump = false;
-     bool crouch = false;
-     bool dash = false;
+
+    [Space]
+    bool jump = false;
+    bool crouch = false;
+    bool dash = false;
+
+    [Space(2)]
+    public bool isMoving = true;
+    public bool isDashing = true;
+    public bool activNoDmg = false;
 
     void Start()
     {
@@ -34,6 +42,27 @@ public class PlayerMovement : MonoBehaviour {
     public void Update()
     {
         Vector3 pos = transform.position;
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            isMoving = false;
+            if ((Input.GetButton("LookLeft") || Input.GetButton("LookRight")) && Input.GetButton("LookUp"))
+            {
+                animator.SetBool("DiagLook", true);
+            }
+            else
+                animator.SetBool("DiagLook", false);
+        }
+        else
+            isMoving = true;
+
+        if (isMoving)
+        {
+            runSpeed = 150f;
+        }else
+            runSpeed = 0.001f;
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         //Restrict the player to the camera's boumdaries
         //This is just for the Y
@@ -60,8 +89,12 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         transform.position = pos;
+        
         //The dash function
-        Dash();
+        if (isDashing)
+        {
+            Dash();
+        }
 
         //animation for our player - the running one!
         //By typing "Mathf.Abs" we make the speed positive, because for the animation we cant use negative speed.I will'n play the animation
@@ -107,7 +140,6 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 /*
-
         if (Input.GetButtonDown("LookUp") && Input.GetButtonDown("Crouch"))
         {
             //Look up animation set to true
@@ -120,9 +152,6 @@ public class PlayerMovement : MonoBehaviour {
 
         }
 */
-
-
-
         if (Input.GetButtonDown("LookUp"))
         {
             //When we are idleing and we start looking up the animation starts playing
@@ -132,22 +161,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             animator.SetBool("LookUpI",false);
         }
-
-
-
-
-        if (Input.GetButtonDown("LookDown"))
-        {
-            //look down animation set up to true
-
-        }
-        else if (Input.GetButtonUp("LookDown"))
-        {
-            //look down animation set up to flase
-        }
-
-
     }
+
    public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
@@ -180,16 +195,12 @@ public class PlayerMovement : MonoBehaviour {
         }
         */
 
-        // the actual movement
-        runSpeed = 150f;
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
         dashSpeed = setDashValue;
 
         //checking the direction if it is 0 it means we aren't dashing
         if (direction == 0)
         {
-            health.immortal = false;
+            health.noDmg = false;
             dash = false;
             animator.SetBool("IsDashing", false);
             //If the LShift and LeftArrow are pressed the direction sets to 1 and we spawn some particles
@@ -232,8 +243,6 @@ public class PlayerMovement : MonoBehaviour {
                 controller.m_FacingRight = false;
                 dash = true;
             }
-
-            // else if its 1, 2, 3 or 4 we are dashing
         }
         else
         {
@@ -257,7 +266,6 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
-                    health.immortal = true;
                     animator.SetBool("IsDashing", true);
 
                 }
@@ -266,7 +274,6 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
-                    health.immortal = true;
                     animator.SetBool("IsDashing", true);
                 }
                 //but if we dash with only LShift and we are facing right we will dash right without having to press arrows
@@ -274,7 +281,6 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.right * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
-                    health.immortal = true;
                     animator.SetBool("IsDashing", true);
                 }
                 //Same thing here but with the opposite direction
@@ -282,18 +288,24 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     controller.m_Rigidbody2D.velocity = Vector2.left * dashSpeed;
                     controller.m_Rigidbody2D.gravityScale = 0f;
-                    health.immortal = true;
                     animator.SetBool("IsDashing", true);
                 }
                 if (direction == 5)
                 {
                     animator.SetBool("IsDashing", true);
-                    health.immortal = true;
                 }
                 else if (direction == 6)
                 {
                     animator.SetBool("IsDashing", true);
-                    health.immortal = true;
+                }
+
+                if (activNoDmg)
+                {
+                    if (direction == 1 || direction == 2 || direction == 3 || direction == 4 || direction == 5 || direction == 6) 
+                    {
+                        health.noDmg = true;
+                    }else
+                        health.noDmg = false;
                 }
             }
         }      

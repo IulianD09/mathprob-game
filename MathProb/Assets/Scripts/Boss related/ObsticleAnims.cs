@@ -8,7 +8,7 @@ public class ObsticleAnims : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("RandAnimation",0 ,3);
+        InvokeRepeating("RandAnimation",0 ,1);
     }
 
     void RandAnimation()
