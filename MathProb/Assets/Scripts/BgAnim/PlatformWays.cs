@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformWays : MonoBehaviour
 {
     public PlatformEffector2D effector;
-    public float waitTime;
+    //public float waitTime;
 
     // Start is called before the first frame update
     void Start()
@@ -16,20 +16,15 @@ public class PlatformWays : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            effector.rotationalOffset = 180f;
+        }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            waitTime = 0.5f;
+            effector.rotationalOffset = 0f;
         }
-        if (Input.GetKey(KeyCode.DownArrow) && Input.GetButton("Jump"))
-        {
-            if (waitTime <= 0)
-            {
-                effector.rotationalOffset = 180f;
-                waitTime = 0.5f;
-            } else
-                waitTime -= Time.deltaTime;
-        }
-        if(Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump")) 
         {
             effector.rotationalOffset = 0f;
         }

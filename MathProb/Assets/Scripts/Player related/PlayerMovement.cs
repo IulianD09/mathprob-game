@@ -43,28 +43,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         Vector3 pos = transform.position;
 
-        if (Input.GetKey(KeyCode.C))
-        {
-            isMoving = false;
-            if ((Input.GetButton("LookLeft") || Input.GetButton("LookRight")) && Input.GetButton("LookUp"))
-            {
-                animator.SetBool("DiagLook", true);
-            }
-            else
-                animator.SetBool("DiagLook", false);
-        }
-        else
-            isMoving = true;
-
-        if (isMoving)
-        {
-            runSpeed = 150f;
-        }else
-            runSpeed = 0.001f;
-
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        //Restrict the player to the camera's boumdaries
+        //Restrict the player to the camera's boundaries
         //This is just for the Y
         if (pos.y + playerBoudaryRadius > Camera.main.orthographicSize)
         {
@@ -89,6 +68,30 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         transform.position = pos;
+
+
+
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            isMoving = false;
+            if ((Input.GetButton("LookLeft") || Input.GetButton("LookRight")) && Input.GetButton("LookUp"))
+            {
+                animator.SetBool("DiagLook", true);
+            }
+            else
+                animator.SetBool("DiagLook", false);
+        }
+        else
+            isMoving = true;
+
+        if (isMoving)
+        {
+            runSpeed = 150f;
+        }else
+            runSpeed = 0.001f;
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         
         //The dash function
         if (isDashing)

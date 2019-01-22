@@ -8,14 +8,22 @@ public class ObsticleAnims : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("RandAnimation",0 ,1);
+        //InvokeRepeating("RandAnimation",0 ,1);
+        RandAnimation();
     }
 
     void RandAnimation()
     {
-        int rand = Random.Range(0, 2);
+        int rand = 0;
+
+        do
+        {
+            rand = Random.Range(0, 2);
+
+        } while (rand > 1 && rand < 0);
 
         Debug.Log(rand);
+
         switch (rand)
         {
             case 0:

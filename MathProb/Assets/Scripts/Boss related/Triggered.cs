@@ -4,23 +4,14 @@ using UnityEngine;
 
 public class Triggered : MonoBehaviour
 {
-    public Animator anim;
-
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
-
+    public Health hp;
+ 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
-         
+            hp.StartCoroutine(hp.TakePlayerDamage());
+            hp.noDmg = true;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        
     }
 }

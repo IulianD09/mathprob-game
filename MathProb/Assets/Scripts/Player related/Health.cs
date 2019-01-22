@@ -19,12 +19,20 @@ public class Health : MonoBehaviour
     public Sprite emptyHeart;
     public SpriteRenderer spriteRenderer;
 
+    public GameObject player;
+
+    private Vector3 startPos, prevPos;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        startPos.y = transform.position.y;
     }
     void Update()
     {
+        prevPos.y = transform.position.y;
+
         if (health > numOfHearts)
         {
             health = numOfHearts;
@@ -58,6 +66,19 @@ public class Health : MonoBehaviour
             Dead();
         }
 
+        if (transform.position.y <= -18.5)
+        {
+            StartCoroutine(TakePlayerDamage());
+
+            if (immortal)
+                noDmg = true;
+
+            if (health > 0)
+                player.transform.position = startPos;
+            else if(health <= 0)
+                player.transform.position = prevPos;
+
+        }
     }
     public void Dead()
     {
@@ -70,8 +91,7 @@ public class Health : MonoBehaviour
         if (other.CompareTag("Boss"))
         {
             StartCoroutine(TakePlayerDamage());
-            noDmg = false;
-            immortal = false;
+            noDmg = true;
         }
     }
     public IEnumerator TakePlayerDamage()
@@ -79,7 +99,7 @@ public class Health : MonoBehaviour
         //CameraShake shake = other.GetComponent<CameraShake>();
         if (!immortal || !noDmg)
         {
-            health--;
+            health -= 1;
             //numOfHearts--;
 
             immortal = true;
@@ -89,15 +109,18 @@ public class Health : MonoBehaviour
             {
                 StartCoroutine(IndicateImmortal());
             }
+
             yield return new WaitForSeconds(immortalTime);
 
-            immortal = false;
-            noDmg = false; 
+            if (immortal)
+                immortal = false;
+            if (noDmg)
+                noDmg = false; 
         }
     }
     private IEnumerator IndicateImmortal()
     {
-        while (immortal)
+        while (immortal) 
         {
             spriteRenderer.enabled = false;
             yield return new WaitForSeconds(.1f);
