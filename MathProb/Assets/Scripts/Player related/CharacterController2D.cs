@@ -21,6 +21,8 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
     //public PlayerMovement player;
 
+    public float fallMultiplier = 2.5f;
+
 	[Header("Events")]
 	[Space]
 
@@ -178,7 +180,7 @@ public class CharacterController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));   
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }  
 	}
 

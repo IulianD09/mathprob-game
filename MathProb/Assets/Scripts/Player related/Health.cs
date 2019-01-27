@@ -8,31 +8,32 @@ public class Health : MonoBehaviour
 
     public int health;
     public int numOfHearts;
+    [SerializeField]
     public bool immortal = false;
     public bool noDmg = false;
 
+    public float speed;
+    public float minX;
+    public float maxX;
+
     [SerializeField]
     private float immortalTime;
+    public float minY;
 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
     public SpriteRenderer spriteRenderer;
 
-    public GameObject player;
-
-    private Vector3 startPos, prevPos;
+    public Transform player;
+    public Collider2D colliderToDisable;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        startPos.y = transform.position.y;
     }
     void Update()
     {
-        prevPos.y = transform.position.y;
-
         if (health > numOfHearts)
         {
             health = numOfHearts;
@@ -64,21 +65,12 @@ public class Health : MonoBehaviour
         if (health == 0)
         {
             Dead();
+            colliderToDisable.enabled = false;
         }
 
-        if (transform.position.y <= -18.5)
-        {
+        if (transform.position.y <= minY)
             StartCoroutine(TakePlayerDamage());
-
-            if (immortal)
-                noDmg = true;
-
-            if (health > 0)
-                player.transform.position = startPos;
-            else if(health <= 0)
-                player.transform.position = prevPos;
-
-        }
+        
     }
     public void Dead()
     {
@@ -91,7 +83,6 @@ public class Health : MonoBehaviour
         if (other.CompareTag("Boss"))
         {
             StartCoroutine(TakePlayerDamage());
-            noDmg = true;
         }
     }
     public IEnumerator TakePlayerDamage()
@@ -99,7 +90,7 @@ public class Health : MonoBehaviour
         //CameraShake shake = other.GetComponent<CameraShake>();
         if (!immortal || !noDmg)
         {
-            health -= 1;
+            health --;
             //numOfHearts--;
 
             immortal = true;
@@ -112,10 +103,8 @@ public class Health : MonoBehaviour
 
             yield return new WaitForSeconds(immortalTime);
 
-            if (immortal)
-                immortal = false;
-            if (noDmg)
-                noDmg = false; 
+            immortal = false;
+            noDmg = false; 
         }
     }
     private IEnumerator IndicateImmortal()

@@ -18,13 +18,13 @@ public class Bullet : MonoBehaviour {
 
         rb.velocity = transform.right * speed;
 
-        if (Input.GetButton("Shoot") && Input.GetButton("LookUp"))
+        if (Input.GetKey(GameManager.GM.shoot) && Input.GetButton("LookUp"))
         {
             rb.velocity = transform.up * speed;
 
             transform.Rotate(0, 0, 90);
         }
-        if (Input.GetButton("Shoot") && (Input.GetButton("LookUp") && ( Input.GetButton("LookLeft") || Input.GetButton("LookRight")) ) )
+        if (Input.GetKey(GameManager.GM.shoot) && (Input.GetButton("LookUp") && ( Input.GetButton("LookLeft") || Input.GetButton("LookRight")) ) )
         {
             if(Input.GetButton("LookLeft"))
             {

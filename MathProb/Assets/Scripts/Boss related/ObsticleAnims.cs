@@ -19,7 +19,7 @@ public class ObsticleAnims : MonoBehaviour
         do
         {
             rand = Random.Range(0, 2);
-
+            rand++;
         } while (rand > 1 && rand < 0);
 
         Debug.Log(rand);

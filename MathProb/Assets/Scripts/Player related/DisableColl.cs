@@ -14,6 +14,10 @@ public class DisableColl : MonoBehaviour {
     public bool succesivelyV1 = false;
     [HideInInspector]
     public bool succesivelyV2 = false;
+    [HideInInspector]
+    public bool FirstAndLastV1 = false;
+    [HideInInspector]
+    public bool FirstAndLastV2 = false;
 
     public bool endAttack = true;
     public bool firstAndLast = false;
@@ -69,6 +73,7 @@ public class DisableColl : MonoBehaviour {
         endAttack = false;
         evenRows = false;
         oddRows = false;
+        firstAndLast = false;
 
         int rand = Random.Range(0, 2);
 
@@ -99,6 +104,7 @@ public class DisableColl : MonoBehaviour {
         if (rand == 1) 
         {
             succesivelyV2 = true;
+
             if (succesivelyV2) 
             {
                 coll[8].enabled = true;
@@ -122,7 +128,7 @@ public class DisableColl : MonoBehaviour {
                 yield return new WaitForSeconds(wait);
                 coll[4].enabled = false;
             }
-        }
+        }   
 
         endAttack = true;
         succesively = false;
@@ -181,49 +187,21 @@ public class DisableColl : MonoBehaviour {
         oddRows = false;
         succesively = false;
 
-        coll[0].enabled = true;
-        coll[8].enabled = true;
+        int rand = Random.Range(0, 2);
 
-        yield return new WaitForSeconds(FandLTime);
+        if (rand == 0) 
+        {
 
-        coll[0].enabled = false;
-        coll[8].enabled = false;
-
-        coll[1].enabled = true;
-        coll[7].enabled = true;
-
-        yield return new WaitForSeconds(FandLTime);
-
-        coll[1].enabled = false;
-        coll[7].enabled = false;
-
-        coll[2].enabled = true;
-        coll[6].enabled = true;
-
-        yield return new WaitForSeconds(FandLTime);
-
-        coll[2].enabled = false;
-        coll[6].enabled = false;
-
-        coll[3].enabled = true;
-        coll[5].enabled = true;
-
-        yield return new WaitForSeconds(FandLTime);
-
-        coll[3].enabled = false;
-        coll[5].enabled = false;
-
-        yield return new WaitForSeconds(FandLTime);
-
-        coll[4].enabled = false;
-
-        coll[0].enabled = false;
-        coll[8].enabled = false;
-
+        }
+        if (rand == 1) 
+        {
+            
+           
+        }
+        yield return null;
         endAttack = true;
         firstAndLast = false;
-        evenRows = false;
-        oddRows = false;
-        succesively = false;
+        FirstAndLastV1 = false;
+        FirstAndLastV2 = false;
     }
 }

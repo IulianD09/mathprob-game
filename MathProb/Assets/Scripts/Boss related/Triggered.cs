@@ -11,7 +11,6 @@ public class Triggered : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             hp.StartCoroutine(hp.TakePlayerDamage());
-            hp.noDmg = true;
         }
     }
 }

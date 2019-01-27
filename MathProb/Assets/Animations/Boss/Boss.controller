@@ -88,9 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58429eabd89c7a84b8fafc7d1d369f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  minTime: 0.1
-  maxTime: 1
+  timer: 5
+  minTime: 1
+  maxTime: 3
 --- !u!114 &114645903768946486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58429eabd89c7a84b8fafc7d1d369f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 5
-  minTime: 1
-  maxTime: 4
+  timer: 6
+  minTime: 3
+  maxTime: 5
 --- !u!1101 &1101035259479005150
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

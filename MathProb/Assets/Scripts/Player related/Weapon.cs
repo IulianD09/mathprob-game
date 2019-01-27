@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
 
         if (timeBtwShots <= 0)
         {
-            if (Input.GetButton("Shoot"))
+            if (Input.GetKey(GameManager.GM.shoot))
             {
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 
